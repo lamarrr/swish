@@ -4,7 +4,7 @@
 ## Overview 
 Swish is a Modern C++ 17 HTTP client library for Humans
 
-Swish is a simple libcurl wrapper (API) which provides mostly, data structures to make operating with libcurl much easier and pain free as compared to error-prone manual manipulation of sockets.
+Swish is for the most parts, A simple libcurl wrapper which provides mostly, data structures and type safe OOP abstractions to make operating with libcurl much easier and pain free as compared to error-prone manual manipulation of net. sockets.
 
 
 ## Features
@@ -12,6 +12,7 @@ Swish is a simple libcurl wrapper (API) which provides mostly, data structures t
 - Fast file download
 - Simple and expressive API (type safe OOP)
 - Byte type customization
+- Almost zero cost abstraction
 - supports local file://location
 - Custom data structures for ease of use
 
@@ -19,15 +20,12 @@ Swish is a simple libcurl wrapper (API) which provides mostly, data structures t
 ## Installation
 - Install libcurl (7.60.0 or higher)
 - clone this repo
-- build and install using cmake 
-e.g.
-
-For linux users
+- build and install using cmake e.g. For linux users
 	
-	
-		user@pc:~$ cmake .
-		user@pc:~$ sudo make install
-
+```bash	
+user@pc:~$ cmake .
+user@pc:~$ sudo make install
+```
 
 - *or* copy the *swish* directory to your project's local or global include path
 
@@ -70,7 +68,8 @@ int main() {
 Swish depends on libcurl, ensure you have an active installation.
 Compile with the -lcurl postfix flag e.g in clang :
 	
-	
-	user@pc:~$ clang++ -std=c++17 example.cc -o example.o -lcurl
-	user@pc:~$ clang++ -std=c++17 example.cc -o example.o -lcurl
-	user@pc:~$ ./example.o
+```bash
+user@pc:~$ clang++ -std=c++17 example.cc -o example.o -lcurl
+user@pc:~$ clang++ -std=c++17 example.cc -o example.o -lcurl
+user@pc:~$ ./example.o
+```
