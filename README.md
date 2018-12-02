@@ -25,7 +25,6 @@ For linux users
 	* @file: example.cc
 	*
 	*/
-
 	#include <swish/swish.h>
 
 	using namespace swish;
