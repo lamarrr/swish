@@ -11,6 +11,7 @@ Swish is a simple libcurl wrapper (API) which provides mostly, data structures t
 - Install libcurl (7.60.0 or higher)
 - clone this repo
 - build and install using cmake
+e.g.
 For linux users
 	
 	
