@@ -7,6 +7,15 @@ Swish is a Modern C++ 17 HTTP client library for Humans
 Swish is a simple libcurl wrapper (API) which provides mostly, data structures to make operating with libcurl much easier and pain free as compared to error-prone manual manipulation of sockets.
 
 
+## Features
+- GET, POST (Multipart and Form Fields), DELETE, HEAD, TRACE implementations
+- Fast file download
+- Simple and expressive API (type safe OOP)
+- Byte type customization
+- supports local file://
+- Custom data structures for ease of use
+
+
 ## Installation
 - Install libcurl (7.60.0 or higher)
 - clone this repo
