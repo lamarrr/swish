@@ -4,7 +4,7 @@
 ## Overview 
 Swish is a Modern C++ 17 HTTP client library for Humans
 
-Swish is for the most parts, A simple libcurl wrapper which provides mostly, data structures and type safe OOP abstractions to make operating with libcurl much easier and pain free as compared to error-prone manual manipulation of net. sockets.
+Swish is for the most parts, A simple libcurl wrapper which provides, data structures and type safe OOP abstractions to make operating with libcurl much easier and pain free as compared to error-prone manual manipulation of net. sockets.
 
 
 ## Features
