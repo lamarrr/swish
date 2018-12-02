@@ -8,19 +8,20 @@ Swish is a simple libcurl wrapper (API) which provides mostly, data structures t
 
 
 ## Features
-- GET, POST (Multipart and Form Fields), DELETE, HEAD, TRACE implementations
+- Provides implementations for GET, POST (Multipart and Form Fields), DELETE, HEAD, TRACE etc.
 - Fast file download
 - Simple and expressive API (type safe OOP)
 - Byte type customization
-- supports local file://
+- supports local file://location
 - Custom data structures for ease of use
 
 
 ## Installation
 - Install libcurl (7.60.0 or higher)
 - clone this repo
-- build and install using cmake
+- build and install using cmake 
 e.g.
+
 For linux users
 	
 	
@@ -28,38 +29,41 @@ For linux users
 		user@pc:~$ sudo make install
 
 
+- *or* copy the *swish* directory to your project's local or global include path
+
 
 ## Quick Start
-	
-	/**
-	* @file: example.cc
-	*
-	*/
-	#include <swish/swish.h>
 
-	using namespace swish;
+```cpp
+/**
+ * @file: example.cc
+ *
+ */
+#include <swish/swish.h>
 
-	int main() {
-	  // create a new HTTP client
-	  auto client = Client();
+using namespace swish;
 
-	  // Perform request
-	  auto [response, status] = client.Get("https://github.com");
+int main() {
+  // create a new HTTP client
+  auto client = Client();
 
-	  // Check if any errors occured
-	  if (IsOK(status)) {
-	    // convert body buffer to std::basic_string<char> aka std::string
-	    std::cout << response.body.ToString() << "\n";
+  // Perform request
+  auto [response, status] = client.Get("https://github.com");
 
-	  } else {
-	    // Interpret status code to english
-	    std::cerr << "The following Error occured: " << InterpretStatusCode(status)
-		      << "\n";
-	  }
+  // Check if any errors occured
+  if (IsOK(status)) {
+    // convert body buffer to std::basic_string<char> aka std::string
+    std::cout << response.body.ToString() << "\n";
 
-	  return EXIT_SUCCESS;
-	}
+  } else {
+    // Interpret status code to english
+    std::cerr << "The following Error occured: " << InterpretStatusCode(status)
+              << "\n";
+  }
 
+  return EXIT_SUCCESS;
+}
+```
 
 
 ## Building
