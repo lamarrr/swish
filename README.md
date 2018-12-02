@@ -1,11 +1,10 @@
 # Swish
+ ![](assets/icon.png) 
  
- ![](/home/lamar/Documents/workspace/c++/project/swish/assets/icon.png) 
- 
-##Overview 
+## Overview 
 Swish is a Modern C++ 17 HTTP client library for Humans
 
-Swish is a simple indirect libcurl API which provides mostly, data structures to make operating with libcurl much easier and pain free as compared to error-prone manual manipulation of sockets.
+Swish is a simple libcurl wrapper (API) which provides mostly, data structures to make operating with libcurl much easier and pain free as compared to error-prone manual manipulation of sockets.
 
 
 ## Installation
