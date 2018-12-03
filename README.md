@@ -15,7 +15,7 @@ Swish is for the most parts, A simple libcurl wrapper which provides, data struc
 - Almost zero cost abstraction
 - supports local file://location
 - Custom data structures for ease of use
-
+- Proxy and OAuth support
 
 ## Installation
 - Install libcurl (7.60.0 or higher)
