@@ -4,17 +4,22 @@
  * @author Basit Ayantunde (rlamarrr@gmail.com)
  * @brief Templated CURL requests abstraction
  * @version 0.1
- * 
+ *
  * @copyright Copyright (c) 2018
- *      __                __         ____                                    __         
- *     /\ \        __    /\ \       /\  _`\                   __            /\ \        
- *     \ \ \      /\_\   \ \ \____  \ \,\L\_\    __  __  __  /\_\     ____  \ \ \___    
- *      \ \ \  __ \/\ \   \ \ '__`\  \/_\__ \   /\ \/\ \/\ \ \/\ \   /',__\  \ \  _ `\  
- *       \ \ \L\ \ \ \ \   \ \ \L\ \   /\ \L\ \ \ \ \_/ \_/ \ \ \ \ /\__, `\  \ \ \ \ \ 
- *        \ \____/  \ \_\   \ \_,__/   \ `\____\ \ \___x___/'  \ \_\\/\____/   \ \_\ \_\
- *         \/___/    \/_/    \/___/     \/_____/  \/__//__/     \/_/ \/___/     \/_/\/_/
- *                                                                                
- *                                                                                
+ *      __                __         ____                                    __
+ *     /\ \        __    /\ \       /\  _`\                   __            /\ \
+ *     \ \ \      /\_\   \ \ \____  \ \,\L\_\    __  __  __  /\_\     ____  \ \
+ * \___
+ *      \ \ \  __ \/\ \   \ \ '__`\  \/_\__ \   /\ \/\ \/\ \ \/\ \   /',__\  \ \
+ * _ `\
+ *       \ \ \L\ \ \ \ \   \ \ \L\ \   /\ \L\ \ \ \ \_/ \_/ \ \ \ \ /\__, `\  \
+ * \ \ \ \
+ *        \ \____/  \ \_\   \ \_,__/   \ `\____\ \ \___x___/'  \ \_\\/\____/   \
+ * \_\ \_\
+ *         \/___/    \/_/    \/___/     \/_____/  \/__//__/     \/_/ \/___/
+ * \/_/\/_/
+ *
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,7 +27,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- * 
+ *
  */
 
 #include <cstring>
@@ -129,6 +134,59 @@ class Client {
 
     // default
     curl_easy_setopt(curl_handle_, CURLOPT_HTTPGET, true);
+
+    return std::make_pair(std::move(resp), status);
+  }
+
+  template <typename FormDataT = FormData, typename RxByteType = char,
+            typename RxByteTraits = std::char_traits<RxByteType>,
+            typename RxAllocator = std::allocator<RxByteType>,
+            typename TxByteType = char,
+            typename TxByteTraits = std::char_traits<TxByteType>,
+            typename TxAllocator = std::allocator<TxByteType>>
+
+  std::pair<
+      Response<BasicResponseBuffer<RxByteType, RxByteTraits, RxAllocator>>,
+      StatusCode>
+  Post(std::string_view url,
+       std::basic_string<TxByteType, TxByteTraits, TxAllocator>* data) {
+
+           using response_t =
+        Response<BasicResponseBuffer<RxByteType, RxByteTraits, RxAllocator>>;
+
+    auto request_callback = RequestBufferCallback<
+        BasicRequestBuffer<TxByteType, TxByteTraits, TxAllocator>>;
+    using string_t = std::basic_string<TxByteType, TxByteTraits, TxAllocator>;
+    using req_buff_t =
+        BasicRequestBuffer<TxByteType, TxByteTraits, TxAllocator>;
+
+    req_buff_t bdata{data};
+
+    StatusCode config_status = StatusCode::OK;
+
+    config_status = static_cast<StatusCode>(
+        curl_easy_setopt(curl_handle_, CURLOPT_POST, 1L));
+
+    if (!IsOK(config_status))
+      return std::make_pair(response_t{}, config_status);
+
+    config_status = static_cast<StatusCode>(
+        curl_easy_setopt(curl_handle_, CURLOPT_READFUNCTION, request_callback));
+
+    if (!IsOK(config_status))
+      return std::make_pair(response_t{}, config_status);
+
+    config_status = static_cast<StatusCode>(
+        curl_easy_setopt(curl_handle_, CURLOPT_READDATA, &bdata));
+
+    if (!IsOK(config_status))
+      return std::make_pair(response_t{}, config_status);
+
+    auto [resp, status] = Get<RxByteType, RxByteTraits, RxAllocator>(url);
+
+    curl_easy_setopt(curl_handle_, CURLOPT_READDATA, nullptr);
+    curl_easy_setopt(curl_handle_, CURLOPT_READFUNCTION, nullptr);
+    curl_easy_setopt(curl_handle_, CURLOPT_POST, 0L);
 
     return std::make_pair(std::move(resp), status);
   }
