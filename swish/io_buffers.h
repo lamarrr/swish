@@ -110,6 +110,12 @@ class BasicResponseBuffer {
     return std::move(result);
   }
 
+  void Save(std::basic_ofstream<byte_type, byte_traits>* file) {
+    for (const auto& chunk : chunks_) {
+      file->write(chunk.first, chunk.second);
+    }
+  }
+
   void PushCopy(pointer data, size_type total_bytes) {
     pointer data_handle = allocator_.allocate(total_bytes);
     std::memcpy(data_handle, data, total_bytes);
