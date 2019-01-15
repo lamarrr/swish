@@ -149,8 +149,8 @@ class Client {
       Response<BasicResponseBuffer<RxByteType, RxByteTraits, RxAllocator>>,
       StatusCode>
   Post(std::string_view url,
-       std::basic_string<TxByteType, TxByteTraits, TxAllocator>* data) {
-
+     std::basic_string<TxByteType, TxByteTraits, TxAllocator>* data) {
+// change to const here and in requestbuffer
            using response_t =
         Response<BasicResponseBuffer<RxByteType, RxByteTraits, RxAllocator>>;
 

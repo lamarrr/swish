@@ -39,6 +39,22 @@
 #include "type_helpers.h"
 #include "utils.h"
 
+/* curl = curl_easy_init();
+if(curl) {
+  curl_easy_setopt(curl, CURLOPT_URL, url);
+  // abort if slower than 30 bytes/sec during 60 seconds
+  curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, 60L);
+  curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, 30L);
+  res = curl_easy_perform(curl);
+  if(CURLE_OPERATION_TIMEDOUT == res) {
+    printf("Timeout!\n");
+  }
+  // always cleanup
+  curl_easy_cleanup(curl);
+}
+*/
+
+
 namespace swish {
 
 // data structure to represent request configurations for the client

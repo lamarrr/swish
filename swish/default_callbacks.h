@@ -122,7 +122,9 @@ inline std::pair<double, const char*> BytesCountString(Rep byte_size) noexcept {
 inline int DefaultProgressCallback(TransferSpeedMonitor<int64_t, double>* log,
                                    size_t to_download, size_t total_downloaded,
                                    size_t to_upload, size_t total_uploaded) {
-  //
+  // [=======>                      ] 100%
+  // [=====================>        ] 100%
+  // [=============================>] 100%
 
   // ns
   auto time_point = std::chrono::high_resolution_clock::now();
