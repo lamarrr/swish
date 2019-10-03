@@ -13,7 +13,7 @@ Swish is for the most parts, A simple libcurl wrapper which provides, data struc
 - Simple and expressive API (type safe OOP)
 - Byte type customization
 - Almost zero cost abstraction
-- supports local file://location
+- Supports local file://location
 - Custom data structures for ease of use
 - Proxy and OAuth support
 
