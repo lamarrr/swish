@@ -1,0 +1,7 @@
+{
+    "name": "project-swisho",
+    "version-string":"0.1.2",
+    "dependencies": [
+        "curl"
+    ]
+}
