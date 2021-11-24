@@ -1,2 +1,7 @@
 CMakeFiles
 src
+build
+
+#for vim
+*.swp
+compile_commands.json

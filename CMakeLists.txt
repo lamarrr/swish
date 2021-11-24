@@ -12,6 +12,6 @@ endif()
 add_library(Swish INTERFACE)
 
 
-target_link_libraries(Swish INTERFACE CURL)
+target_link_libraries(Swish INTERFACE CURL::libcurl)
 
 install(DIRECTORY swish DESTINATION include)
